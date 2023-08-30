@@ -1,0 +1,101 @@
+package tests;
+import assessment.*;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+
+public class JSONConverterTest {
+
+    private JSONConverter jsonConverter;
+
+    @Before
+    public void setUp() {
+        jsonConverter = new JSONConverter();
+    }
+
+    @Test
+    public void testConvertToJSON() {
+        List<Student> students = new ArrayList<>();
+        Student student1 = new Student();
+        student1.setAdmissionNumber("1001.0");
+        student1.setName("Roshni");
+        student1.setPhy(98);
+        student1.setChem(99);
+        student1.setMaths(78);
+        students.add(student1);
+
+        Student student2 = new Student();
+        student2.setAdmissionNumber("1002.0");
+        student2.setName("gita");
+        student2.setPhy(78);
+        student2.setChem(79);
+        student2.setMaths(90);
+        students.add(student2);
+        
+        Student student3 = new Student();
+        student3.setAdmissionNumber("1003.0");
+        student3.setName("sita");
+        student3.setPhy(67);
+        student3.setChem(68);
+        student3.setMaths(58);
+        students.add(student3);
+        
+        Student student4 = new Student();
+        student4.setAdmissionNumber("1004.0");
+        student4.setName("Rita");
+        student4.setPhy(77);
+        student4.setChem(78);
+        student4.setMaths(95);
+        students.add(student4);
+
+        String expectedJSON ="[\n"
+                + "  {\n"
+                + "    \"name\": \"Roshni\",\n"
+                + "    \"admissionNumber\": \"1001.0\",\n"
+                + "    \"phy\": 98,\n"
+                + "    \"chem\": 99,\n"
+                + "    \"maths\": 78,\n"
+                + "    \"point\": 0.0\n"
+                + "  },\n"
+                + "  {\n"
+                + "    \"name\": \"gita\",\n"
+                + "    \"admissionNumber\": \"1002.0\",\n"
+                + "    \"phy\": 78,\n"
+                + "    \"chem\": 79,\n"
+                + "    \"maths\": 90,\n"
+                + "    \"point\": 0.0\n"
+                + "  },\n"
+                + "  {\n"
+                + "    \"name\": \"sita\",\n"
+                + "    \"admissionNumber\": \"1003.0\",\n"
+                + "    \"phy\": 67,\n"
+                + "    \"chem\": 68,\n"
+                + "    \"maths\": 58,\n"
+                + "    \"point\": 0.0\n"
+                + "  },\n"
+                + "  {\n"
+                + "    \"name\": \"Rita\",\n"
+                + "    \"admissionNumber\": \"1004.0\",\n"
+                + "    \"phy\": 77,\n"
+                + "    \"chem\": 78,\n"
+                + "    \"maths\": 95,\n"
+                + "    \"point\": 0.0\n"
+                + "  }\n"
+                
+                
+                + "]";
+
+        String actualJSON = jsonConverter.convertToJSON(students);
+        assertEquals(expectedJSON, actualJSON);
+    }
+
+    @Test
+    public void testConvertToJSONEmptyList() {
+        List<Student> students = new ArrayList<>();
+        String expectedJSON = "[]";
+        String actualJSON = jsonConverter.convertToJSON(students);
+        assertEquals(expectedJSON, actualJSON);
+    }
+}

@@ -1,0 +1,84 @@
+package assessment;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+//Implementation of StudentDAO using MySQL database
+public class MySQLStudentDAO implements StudentDAO {
+ private Connection connection;
+
+
+ public MySQLStudentDAO(Connection connection) {
+	this.connection=connection;
+}
+ 
+@Override
+ public void saveStudent(Student student) throws SQLException {
+ 	// Check if the admission number already exists
+     List<Student> existingRecords = searchStudents(student.getAdmissionNumber()); 
+
+     if (!existingRecords.isEmpty()) {
+         // Admission number already exists, delete the existing record
+         deleteStudent(existingRecords.get(0));
+         System.out.println("Existing record deleted successfully.");
+     }
+
+     String query = "INSERT INTO students (admissionNumber, name, phy,chem,maths) VALUES (?, ?, ?, ?, ?)";
+
+     try (PreparedStatement statement = connection.prepareStatement(query)) {
+         statement.setString(1, student.getAdmissionNumber());
+         statement.setString(2, student.getName());
+         statement.setInt(3, student.getPhy());
+         statement.setInt(4, student.getChem());
+         statement.setInt(5, student.getMaths());
+        
+
+         statement.executeUpdate();
+     }
+     System.out.println("New record inserted successfully.");
+ }
+ public void deleteStudent(Student student) throws SQLException {
+     String deleteQuery = "DELETE FROM students WHERE admissionNumber = ?";
+     try (PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+         deleteStatement.setString(1, student.getAdmissionNumber());
+         deleteStatement.executeUpdate();
+     }
+ }
+
+ 
+ @Override
+ public List<Student> searchStudents(String keyword) throws SQLException {
+     String query = "SELECT * FROM students WHERE admissionNumber = ? OR name = ?";
+
+     try (PreparedStatement statement = connection.prepareStatement(query)) {
+         statement.setString(1, keyword);
+         statement.setString(2, keyword);
+
+         ResultSet resultSet = statement.executeQuery();
+         List<Student> students = new ArrayList<>();
+
+         while (resultSet.next()) {
+             Student student = new Student();
+             student.setAdmissionNumber(resultSet.getString("admissionNumber"));
+             student.setName(resultSet.getString("name"));
+             student.setPhy(resultSet.getInt("phy"));
+             student.setChem(resultSet.getInt("chem"));
+             student.setMaths(resultSet.getInt("maths"));
+         
+
+             students.add(student);
+         }
+
+         return students;
+     }
+ }
+ @Override
+ public void close() throws SQLException {
+     if (connection != null) {
+         connection.close();
+     }
+ }
+}

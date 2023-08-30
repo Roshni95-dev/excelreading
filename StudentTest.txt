@@ -1,0 +1,96 @@
+package tests;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import assessment.*;
+public class StudentTest {
+
+    @Test
+    public void testGetGrade() {
+        Student student = new Student();
+
+        assertEquals("A1", student.getGrade(95));
+        assertEquals("A2", student.getGrade(85));
+        assertEquals("B1", student.getGrade(78));
+        assertEquals("B2", student.getGrade(65));
+        assertEquals("C1", student.getGrade(55));
+        assertEquals("C2", student.getGrade(45));
+        assertEquals("D", student.getGrade(35));
+        assertEquals("E1", student.getGrade(25));
+        assertEquals("E2", student.getGrade(10));
+    }
+
+    @Test
+    public void testGetGradePoint() {
+        Student student = new Student();
+
+        assertEquals(10.0, student.getGradePoint(95), 0.001);
+        assertEquals(9.0, student.getGradePoint(85), 0.001);
+        assertEquals(8.0, student.getGradePoint(78), 0.001);
+        assertEquals(7.0, student.getGradePoint(68), 0.001);
+        assertEquals(6.0, student.getGradePoint(55), 0.001);
+        assertEquals(5.0, student.getGradePoint(45), 0.001);
+        assertEquals(4.0, student.getGradePoint(35), 0.001);
+        assertEquals(3.0, student.getGradePoint(25), 0.001);
+        assertEquals(0.0, student.getGradePoint(10), 0.001);
+    }
+
+  /*  @Test
+    public void testCalculatePercentage() {
+        Student student = new Student();
+        student.setPhy(90);
+        student.setChem(85);
+        student.setMaths(78);
+
+        assertEquals(84.333, Student.calculatePercentage(), 0.001);
+    }*/
+
+    
+
+
+    @Test
+    public void testSetGrade() {
+        
+        Student student = new Student();
+
+     
+        String expectedGrade = "B";
+        student.setGrade(expectedGrade);
+
+
+        String actualGrade = student.getGrade();
+
+        assertEquals(expectedGrade, actualGrade);
+    }
+
+    @Test
+    public void testGetPoint() {
+      
+        Student student = new Student();
+
+      
+        double expectedPoint = 9.5;
+        student.setPoint(expectedPoint);
+
+   
+        double actualPoint = student.getPoint();
+
+        
+        assertEquals(expectedPoint, actualPoint, 0.001); 
+    }
+
+    @Test
+    public void testSetPoint() {
+      
+        Student student = new Student(); 
+
+        
+        double expectedPoint = 8.7;
+        student.setPoint(expectedPoint);
+
+       
+        double actualPoint = student.getPoint();
+
+        
+        assertEquals(expectedPoint, actualPoint, 0.001); 
+    }
+}

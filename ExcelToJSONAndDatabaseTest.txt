@@ -1,0 +1,98 @@
+package tests;
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+import java.io.IOException;
+
+import java.util.List;
+import java.util.ArrayList;
+
+
+import org.junit.Test;
+import assessment.*;
+
+public class ExcelToJSONAndDatabaseTest {
+
+    @Test
+    public void testLoadStudentsFromExcel() throws IOException {
+        File file = new File("excel/grades.xlsx");
+        ExcelDataLoader dataLoader = new ExcelDataLoader();
+        List<Student> students = dataLoader.loadStudentsFromExcel(file);
+
+    
+        assertEquals(4, students.size());
+    }
+
+    @Test
+    public void testConvertToJSON() {
+        
+
+        JSONConverter jsonConverter = new JSONConverter();
+        String expectedJson = jsonConverter.convertToJSON( createTestStudents());
+        
+      
+        List<Student> students = createTestStudents();
+        String actualJson = jsonConverter.convertToJSON(students);
+        assertEquals(expectedJson, actualJson);
+    }
+
+
+    private List<Student> createTestStudents() {
+       
+        List<Student> testStudents = new ArrayList<>();
+        Student student1 = new Student();
+      
+        student1.setName("Roshni");
+        student1.setAdmissionNumber("1001");
+        student1.setPhy(98);
+        student1.setChem(99);
+        student1.setMaths(78);
+        testStudents.add(student1);
+        
+        Student student2 = new Student();
+        
+        student1.setName("gita");
+        student1.setAdmissionNumber("1002");
+        student1.setPhy(78);
+        student1.setChem(79);
+        student1.setMaths(90);
+        testStudents.add(student2);
+        
+    Student student3 = new Student();
+        
+        student3.setName("sita");
+        student3.setAdmissionNumber("1003");
+        student3.setPhy(67);
+        student3.setChem(68);
+        student3.setMaths(58);
+        testStudents.add(student3);
+        
+ Student student4 = new Student();
+        
+        student4.setName("Rita");
+        student4.setAdmissionNumber("1004");
+        student4.setPhy(77);
+        student4.setChem(78);
+        student4.setMaths(95);
+        testStudents.add(student4);
+
+        return testStudents;
+    }
+
+    @Test
+    public void testCalculatePercentage() {
+      
+        Student testStudent = new Student();
+        testStudent.setPhy(90);
+        testStudent.setChem(80);
+        testStudent.setMaths(85);
+
+        double expectedPercentage = (90 + 80 + 85) / 3.0;
+
+        double actualPercentage = ExcelToJSONAndDatabase.calculatePercentage(testStudent);
+
+        assertEquals(expectedPercentage, actualPercentage, 0.01);
+    }
+
+    
+}

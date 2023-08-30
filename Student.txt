@@ -1,0 +1,180 @@
+package assessment;
+
+
+
+public class Student {
+
+		private String name;
+	    private String admissionNumber;
+	    private int phy;
+		private int chem;
+		private int  maths;
+		private String grade;
+		private double point;
+		private String email;
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail( String email) {
+		this.email = email;
+		}
+		
+    	public String getName() {
+			   return name;
+    	}
+
+    	public void setName(String name) {
+    		this.name = name;
+    	}
+
+	    public String getAdmissionNumber() {
+	    	return admissionNumber;
+	    }
+
+	    public void setAdmissionNumber(String admissionNumber) {
+	    	this.admissionNumber = admissionNumber;
+	    }
+	    
+	    public String getGrade() {
+	    	return grade; 
+	    }
+
+		public void setGrade(String grade) {
+			this.grade = grade;
+		}
+
+		public double getPoint() {
+			return point;
+		}
+
+		public void setPoint(double point) {
+			this.point = point;
+		}
+
+		public int getPhy() {
+			return phy;
+		}
+
+		public void setPhy(int phy) {
+			this.phy = phy;
+		}
+
+		public int getChem() {
+			return chem;
+		}
+
+		public void setChem(int chem) {
+			this.chem = chem;
+		}
+
+		public int getMaths() {
+			return maths;
+		}
+
+		public void setMaths(int maths) {
+			this.maths = maths;
+		}
+
+	    public String getGrade(int marks) {
+
+	        if (marks >= 91 && marks <= 100) {
+
+	            return "A1";
+
+	        } else if (marks >= 81 && marks <= 90) {
+
+	            return "A2";
+
+	        } else if (marks >= 71 && marks <= 80) {
+
+	            return "B1";
+
+	        } else if (marks >= 61 && marks <= 70) {
+
+	            return "B2";
+
+	        } else if (marks >= 51 && marks <= 60) {
+
+	            return "C1";
+
+	        } else if (marks >= 41 && marks <= 50) {
+
+	            return "C2";
+
+	        } else if (marks >= 33 && marks <= 40) {
+
+	            return "D";
+
+	        } else if (marks >= 21 && marks <= 32) {
+
+	            return "E1";
+
+	        } else {
+
+	            return "E2";
+
+	        }
+
+	    }
+
+
+
+	    public double getGradePoint(int marks) {
+
+	        if (marks >= 91 && marks <= 100) {
+
+	            return 10.0;
+
+	        } else if (marks >= 81 && marks <= 90) {
+
+	            return 9.0;
+
+	        } else if (marks >= 71 && marks <= 80) {
+
+	            return 8.0;
+
+	        } else if (marks >= 61 && marks <= 70) {
+
+	            return 7.0;
+
+	        } else if (marks >= 51 && marks <= 60) {
+
+	            return 6.0;
+
+	        } else if (marks >= 41 && marks <= 50) {
+
+	            return 5.0;
+
+	        } else if (marks >= 33 && marks <= 40) {
+
+	            return 4.0;
+
+	        } else if (marks >= 21 && marks <= 32) {
+
+	            return 3.0;
+
+	        } else {
+
+	            return 0.0;
+
+	        }
+
+	    }
+
+	   
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+
+package assessment;
+
+import java.sql.*;
+
+import java.util.List;
+
+interface StudentDAO extends AutoCloseable {
+
+    void saveStudent(Student student) throws SQLException;
+
+    List<Student> searchStudents(String keyword) throws SQLException;
+
+    @Override
+
+    void close() throws SQLException;
+
+}
